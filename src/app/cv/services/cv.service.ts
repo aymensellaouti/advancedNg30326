@@ -4,9 +4,7 @@ import { Observable } from "rxjs";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { API } from "../../../config/api.config";
 
-@Injectable({
-  providedIn: "root",
-})
+@Injectable()
 export class CvService {
   private cvs: Cv[] = [];
   constructor(private http: HttpClient) {
