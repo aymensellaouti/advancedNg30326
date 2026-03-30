@@ -56,7 +56,8 @@ import { LoggerService } from "./services/logger.service";
 import { Logger2Service } from "./services/logger2.service";
 import { LoggerInjectionToken } from "./tokens/logger.injection-token";
 import { Logger3Service } from "./services/logger3.service";
-
+import { UUID_TOKEN } from "./tokens/uuid.inject-token";
+import {v4 as uuidV4} from 'uuid';
 @NgModule({
   declarations: [
     AppComponent,
@@ -136,6 +137,12 @@ import { Logger3Service } from "./services/logger3.service";
       useClass: Logger3Service,
       multi: true
     },
+    {
+      // esm el plat
+      provide: UUID_TOKEN,
+      // le plat
+      useValue: uuidV4
+    }
   ],
   bootstrap: [AppComponent],
 })
