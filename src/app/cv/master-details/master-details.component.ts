@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Cv } from '../model/cv';
 import { CvService } from '../services/cv.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-master-details',
@@ -10,6 +11,8 @@ import { CvService } from '../services/cv.service';
 })
 export class MasterDetailsComponent {
   cvs: Cv[] = [];
+  router = inject(Router);
+  acr = inject(ActivatedRoute);
   constructor(
     private toastr: ToastrService,
     private cvService: CvService,
@@ -28,6 +31,7 @@ export class MasterDetailsComponent {
     this.toastr.info('Bienvenu dans notre CvTech');
   }
   onForwardCv(cv: Cv) {
+    this.router.navigate([cv.id], {relativeTo: this.acr })
     // Navigation à la nouvelle route
   }
 }

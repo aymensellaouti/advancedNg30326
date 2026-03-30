@@ -5,6 +5,7 @@ import { ToastrService } from "ngx-toastr";
 import { CvService } from "../services/cv.service";
 import { EMPTY, Observable, catchError, of } from "rxjs";
 import { TodoService } from "src/app/todo/service/todo.service";
+import { ActivatedRoute } from "@angular/router";
 @Component({
   selector: "app-cv",
   templateUrl: "./cv.component.html",
@@ -16,22 +17,24 @@ export class CvComponent {
   /*   selectedCv: Cv | null = null; */
   date = new Date();
   todoService = inject(TodoService);
+  acr = inject(ActivatedRoute);
   constructor(
     private logger: LoggerService,
     private toastr: ToastrService,
-    private cvService: CvService
+    //private cvService: CvService
   ) {
-    this.cvService.getCvs().subscribe({
-      next: (cvs) => {
-        this.cvs = cvs;
-      },
-      error: () => {
-        this.cvs = this.cvService.getFakeCvs();
-        this.toastr.error(`
-          Attention!! Les données sont fictives, problème avec le serveur.
-          Veuillez contacter l'admin.`);
-      },
-    });
+    this.cvs = this.acr.snapshot.data['cvs'];
+    // this.cvService.getCvs().subscribe({
+    //   next: (cvs) => {
+    //     this.cvs = cvs;
+    //   },
+    //   error: () => {
+    //     this.cvs = this.cvService.getFakeCvs();
+    //     this.toastr.error(`
+    //       Attention!! Les données sont fictives, problème avec le serveur.
+    //       Veuillez contacter l'admin.`);
+    //   },
+    // });
     this.logger.logger("je suis le cvComponent");
     this.toastr.info("Bienvenu dans notre CvTech");
   }
