@@ -60,6 +60,7 @@ import { UUID_TOKEN } from "./tokens/uuid.inject-token";
 import {v4 as uuidV4} from 'uuid';
 import { WeekTodoComponent } from './todo/week-todo/week-todo.component';
 import { MasterDetailsComponent } from './cv/master-details/master-details.component';
+import { NgxUiLoaderModule } from "ngx-ui-loader";
 @NgModule({
   declarations: [
     AppComponent,
@@ -116,6 +117,7 @@ import { MasterDetailsComponent } from './cv/master-details/master-details.compo
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000',
     }),
+    NgxUiLoaderModule,
   ],
   providers: [
     AuthInterceptorProvider,
@@ -129,24 +131,24 @@ import { MasterDetailsComponent } from './cv/master-details/master-details.compo
     {
       provide: LoggerInjectionToken,
       useClass: Logger2Service,
-      multi: true
+      multi: true,
     },
     {
       provide: LoggerInjectionToken,
       useClass: LoggerService,
-      multi: true
+      multi: true,
     },
     {
       provide: LoggerInjectionToken,
       useClass: Logger3Service,
-      multi: true
+      multi: true,
     },
     {
       // esm el plat
       provide: UUID_TOKEN,
       // le plat
-      useValue: uuidV4
-    }
+      useValue: uuidV4,
+    },
   ],
   bootstrap: [AppComponent],
 })
