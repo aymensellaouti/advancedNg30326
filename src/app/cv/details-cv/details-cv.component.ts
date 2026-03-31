@@ -5,37 +5,32 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { APP_ROUTES } from '../../../config/routes.config';
 import { AuthService } from '../../auth/services/auth.service';
+import { catchError, EMPTY, Observable, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-details-cv',
   templateUrl: './details-cv.component.html',
   styleUrls: ['./details-cv.component.css'],
 })
-export class DetailsCvComponent implements OnInit {
+export class DetailsCvComponent {
   cv: Cv | null = null;
   constructor(
     private cvService: CvService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private toastr: ToastrService,
-    public authService: AuthService
+    public authService: AuthService,
   ) {}
-
-  ngOnInit() {
-    this.activatedRoute.params.subscribe({
-      next: (params) => {
-        this.cvService.getCvById(+params['id']).subscribe({
-          next: (cv) => {
-            this.cv = cv;
-          },
-          error: (e) => {
-            this.router.navigate([APP_ROUTES.cv]);
-          },
-      });
-      }
+  // déclarative
+  cv$: Observable<Cv> = this.activatedRoute.params.pipe(
+    switchMap((param) => this.cvService.getCvById(+param['id'])),
+    // operators
+    catchError(e => {
+      this.router.navigate([APP_ROUTES.cv]);
+      return EMPTY;
     })
+  );
 
-  }
   deleteCv(cv: Cv) {
     this.cvService.deleteCvById(cv.id).subscribe({
       next: () => {
@@ -44,7 +39,7 @@ export class DetailsCvComponent implements OnInit {
       },
       error: () => {
         this.toastr.error(
-          `Problème avec le serveur veuillez contacter l'admin`
+          `Problème avec le serveur veuillez contacter l'admin`,
         );
       },
     });

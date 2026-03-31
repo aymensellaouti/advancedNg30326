@@ -19,19 +19,19 @@ export class AppComponent {
     loggersService.forEach(
       loggerService => loggerService.logger('cc')
     );
-    this.router.events.subscribe({
-      next: (event) => {
-        if (event instanceof NavigationStart) {
-          this.ngxService.start();
-        } else if (
-          event instanceof NavigationEnd ||
-          event instanceof NavigationError ||
-          event instanceof NavigationCancel
-        ) {
-          this.ngxService.stop();
-        }
-      }
-    })
+    // this.router.events.subscribe({
+    //   next: (event) => {
+    //     if (event instanceof NavigationStart) {
+    //       this.ngxService.start();
+    //     } else if (
+    //       event instanceof NavigationEnd ||
+    //       event instanceof NavigationError ||
+    //       event instanceof NavigationCancel
+    //     ) {
+    //       this.ngxService.stop();
+    //     }
+    //   }
+    // })
 
   }
 }
