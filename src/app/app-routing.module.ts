@@ -14,24 +14,38 @@ import { DetailsCvComponent } from "./cv/details-cv/details-cv.component";
 import { RhComponent } from "./optimizationPattern/rh/rh.component";
 import { MasterDetailsComponent } from "./cv/master-details/master-details.component";
 import { cvsResolver } from "./cv/cvs-resolver.resolver";
+import { canLeaveGuard } from "./guards/can-leave.guard";
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'rh', component: RhComponent },
   {
     path: 'cv',
-    component: CvComponent,
-    resolve: {
-      cvs: cvsResolver
-    }
+    canActivateChild: [],
+    children: [
+      {
+        path: '',
+        component: CvComponent,
+
+        resolve: {
+          cvs: cvsResolver,
+        },
+      },
+      {
+        path: 'add',
+        component: AddCvComponent,
+        canActivate: [AuthGuard],
+        canDeactivate: [canLeaveGuard],
+      },
+      {
+        path: 'list',
+        component: MasterDetailsComponent,
+        children: [{ path: ':id', component: DetailsCvComponent }],
+      },
+      { path: ':id', component: DetailsCvComponent },
+    ],
   },
-  { path: 'cv/add', component: AddCvComponent, canActivate: [AuthGuard] },
-  {
-    path: 'cv/list',
-    component: MasterDetailsComponent,
-    children: [{ path: ':id', component: DetailsCvComponent }],
-  },
-  { path: 'cv/:id', component: DetailsCvComponent },
+
   {
     path: '',
     component: FrontComponent,
