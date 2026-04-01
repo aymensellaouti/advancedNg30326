@@ -1,7 +1,8 @@
 import { Component, inject } from "@angular/core";
 import { FormBuilder, AbstractControl } from "@angular/forms";
-import { debounceTime, distinctUntilChanged, switchMap, tap } from "rxjs";
+import { debounceTime, distinctUntilChanged, filter, Observable, switchMap, tap } from "rxjs";
 import { CvService } from "../services/cv.service";
+import { Cv } from "../model/cv";
 
 @Component({
   selector: "app-autocomplete",
@@ -11,13 +12,19 @@ import { CvService } from "../services/cv.service";
 export class AutocompleteComponent {
   formBuilder = inject(FormBuilder);
   cvService = inject(CvService);
+  form = this.formBuilder.group({ search: [""] });
   get search(): AbstractControl {
     return this.form.get("search")!;
   }
-  form = this.formBuilder.group({ search: [""] });
+  cvs$: Observable<Cv[]> = this.search.valueChanges.pipe(
+    //tap(chaine => console.log('before debounce '+ chaine)),
+    debounceTime(500),
+    //tap(chaine => console.log('after debounce '+ chaine)),
+    filter(chaine => chaine.length >= 3),
+    switchMap(name => this.cvService.selectByName(name)),
+    distinctUntilChanged()
+  )
   constructor() {
-    this.search.valueChanges.subscribe({
-      next: chaine => console.log(chaine)
-    })
+
   }
 }
