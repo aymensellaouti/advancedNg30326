@@ -26,7 +26,7 @@ export class ProductsComponent {
   /* Tips : vous pouvez voir les différents imports non utilisés et vous en inspirer */
   products$: Observable<Product[]> = this.#settings$.pipe(
     concatMap(setting => this.productService.getProducts(setting)),
-    tap(resultat => this.total = resultat.total),
+    //tap(resultat => this.total = resultat.total),
     map(result => result.products),
     scan((oldProducts, newProducts) => [...oldProducts, ...newProducts]),
     takeWhile(products => this.total > products.length)

@@ -15,4 +15,9 @@ export class AutocompleteComponent {
     return this.form.get("search")!;
   }
   form = this.formBuilder.group({ search: [""] });
+  constructor() {
+    this.search.valueChanges.subscribe({
+      next: chaine => console.log(chaine)
+    })
+  }
 }
