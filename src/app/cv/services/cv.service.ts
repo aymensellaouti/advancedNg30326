@@ -1,16 +1,21 @@
 import { Injectable } from "@angular/core";
 import { Cv } from "../model/cv";
-import { Observable } from "rxjs";
+import { Observable, Subject } from "rxjs";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { API } from "../../../config/api.config";
 
 @Injectable()
 export class CvService {
   private cvs: Cv[] = [];
+  #selectedCv = new Subject<Cv>();
+  /**
+   * @var Le flux des cvs sélecionnés
+   */
+  selectedCv$ = this.#selectedCv.asObservable();
   constructor(private http: HttpClient) {
     this.cvs = [
-      new Cv(1, "aymen", "sellaouti", "teacher", "as.jpg", "1234", 40),
-      new Cv(2, "skander", "sellaouti", "enfant", "       ", "1234", 4),
+      new Cv(1, 'aymen', 'sellaouti', 'teacher', 'as.jpg', '1234', 40),
+      new Cv(2, 'skander', 'sellaouti', 'enfant', '       ', '1234', 4),
     ];
   }
 
@@ -98,7 +103,7 @@ export class CvService {
    */
   selectByName(name: string) {
     const search = `{"where":{"name":{"like":"%${name}%"}}}`;
-    const params = new HttpParams().set("filter", search);
+    const params = new HttpParams().set('filter', search);
     return this.http.get<any>(API.cv, { params });
   }
   /**
@@ -109,7 +114,15 @@ export class CvService {
    */
   selectByProperty(property: string, value: string) {
     const search = `{"where":{"${property}":"${value}"}}`;
-    const params = new HttpParams().set("filter", search);
+    const params = new HttpParams().set('filter', search);
     return this.http.get<Cv[]>(API.cv, { params });
+  }
+
+  /**
+   * Permet d'ajouter un cv au flux des cvs sélectionnés
+   * @param cv le cv sélectionné
+   */
+  selectCv(cv: Cv) {
+    this.#selectedCv.next(cv);
   }
 }

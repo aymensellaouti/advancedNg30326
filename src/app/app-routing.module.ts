@@ -26,7 +26,6 @@ const routes: Routes = [
       {
         path: '',
         component: CvComponent,
-
         resolve: {
           cvs: cvsResolver,
         },

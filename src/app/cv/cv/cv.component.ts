@@ -13,7 +13,8 @@ import { ActivatedRoute } from "@angular/router";
 })
 export class CvComponent {
   cvs: Cv[] = [];
-  selectedCv: Cv | null = null;
+  cvService = inject(CvService);
+  selectedCv$ = this.cvService.selectedCv$;
   /*   selectedCv: Cv | null = null; */
   date = new Date();
   todoService = inject(TodoService);
@@ -38,7 +39,5 @@ export class CvComponent {
     this.logger.logger("je suis le cvComponent");
     this.toastr.info("Bienvenu dans notre CvTech");
   }
-  onForwardCv(cv: Cv) {
-    this.selectedCv = cv;
-  }
+
 }
