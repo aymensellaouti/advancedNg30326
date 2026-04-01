@@ -4,6 +4,15 @@ import { LoginResponseDto } from '../dto/login-response.dto';
 import { HttpClient } from '@angular/common/http';
 import { API } from '../../../config/api.config';
 import { Observable, tap } from 'rxjs';
+import { CONSTANTES } from 'src/config/const.config';
+
+export class ConnectedUser {
+  constructor(
+    public id: number,
+    public email: string,
+  ) {}
+}
+
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +26,7 @@ export class AuthService {
     return this.http.post<LoginResponseDto>(API.login, credentials).pipe(
       tap((response) => {
         // eli thabou ama rani ma nbadelch le flux
-      })
+      }),
     );
   }
 
@@ -27,5 +36,17 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('token');
+  }
+
+  saveToken(token: string) {
+    localStorage.setItem(CONSTANTES.authToken, token);
+  }
+
+  getToken(): string {
+    return localStorage.getItem(CONSTANTES.authToken) ?? '';
+  }
+
+  removeToken() {
+    localStorage.removeItem(CONSTANTES.authToken);
   }
 }
