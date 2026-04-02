@@ -51,6 +51,10 @@ import {v4 as uuidV4} from 'uuid';
 import { NgxUiLoaderModule } from "ngx-ui-loader";
 import { TodoModule } from "./todo/todo.module";
 import { CvModule } from "./cv/cv.module";
+import { PereCDComponent } from './cd/pere-cd/pere-cd.component';
+import { FilsCDComponent } from './cd/fils-cd/fils-cd.component';
+import { UserListItemsComponent } from './optimizationPattern/user-list-items/user-list-items.component';
+import { FiboPipe } from './pipes/fibo.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -82,6 +86,10 @@ import { CvModule } from "./cv/cv.module";
     RhComponent,
     UserListComponent,
     ProductsComponent,
+    PereCDComponent,
+    FilsCDComponent,
+    UserListItemsComponent,
+    FiboPipe,
   ],
   imports: [
     BrowserModule,

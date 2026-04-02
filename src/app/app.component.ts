@@ -1,4 +1,4 @@
-import { Component, inject, Inject } from '@angular/core';
+import { ApplicationRef, Component, inject, Inject } from '@angular/core';
 import { LoggerService } from './services/logger.service';
 import { LoggerInjectionToken } from './tokens/logger.injection-token';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
@@ -13,6 +13,7 @@ export class AppComponent {
   title = 'Starting Advanced Topics';
   ngxService =  inject(NgxUiLoaderService);
   router = inject(Router);
+  appRef = inject(ApplicationRef);
   constructor(
     @Inject(LoggerInjectionToken)
     private loggersService: LoggerService[]) {
