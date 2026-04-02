@@ -6,12 +6,15 @@ import { ToastrService } from 'ngx-toastr';
 import { APP_ROUTES } from '../../../config/routes.config';
 import { AuthService } from '../../auth/services/auth.service';
 import { catchError, EMPTY, Observable, switchMap } from 'rxjs';
+import { AutocompleteComponent } from '../autocomplete/autocomplete.component';
+import { AsyncPipe } from '@angular/common';
+import { DefaultImagePipe } from '../pipes/default-image.pipe';
 
 @Component({
     selector: 'app-details-cv',
     templateUrl: './details-cv.component.html',
     styleUrls: ['./details-cv.component.css'],
-    standalone: false
+    imports: [AutocompleteComponent, AsyncPipe, DefaultImagePipe]
 })
 export class DetailsCvComponent {
   cv: Cv | null = null;

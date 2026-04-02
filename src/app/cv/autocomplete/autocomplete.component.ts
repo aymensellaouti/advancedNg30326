@@ -1,14 +1,16 @@
 import { Component, inject } from "@angular/core";
-import { FormBuilder, AbstractControl } from "@angular/forms";
+import { FormBuilder, AbstractControl, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { debounceTime, distinctUntilChanged, filter, Observable, switchMap, tap } from "rxjs";
 import { CvService } from "../services/cv.service";
 import { Cv } from "../model/cv";
+import { ListComponent } from "../list/list.component";
+import { AsyncPipe } from "@angular/common";
 
 @Component({
     selector: "app-autocomplete",
     templateUrl: "./autocomplete.component.html",
     styleUrls: ["./autocomplete.component.css"],
-    standalone: false
+    imports: [FormsModule, ReactiveFormsModule, ListComponent, AsyncPipe]
 })
 export class AutocompleteComponent {
   formBuilder = inject(FormBuilder);

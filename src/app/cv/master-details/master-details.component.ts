@@ -2,15 +2,17 @@ import { Component, inject } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Cv } from '../model/cv';
 import { CvService } from '../services/cv.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { catchError, count, of, retry } from 'rxjs';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import { ListComponent } from '../list/list.component';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-master-details',
     templateUrl: './master-details.component.html',
     styleUrls: ['./master-details.component.css'],
-    standalone: false
+    imports: [ListComponent, RouterOutlet, AsyncPipe]
 })
 export class MasterDetailsComponent {
   cvs: Cv[] = [];

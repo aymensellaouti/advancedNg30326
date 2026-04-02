@@ -11,12 +11,13 @@ import {
 import { Product } from "./dto/product.dto";
 import { ProductService } from "./services/product.service";
 import { Settings } from "./dto/product-settings.dto";
+import { AsyncPipe } from "@angular/common";
 
 @Component({
     selector: 'app-products',
     templateUrl: './products.component.html',
     styleUrls: ['./products.component.css'],
-    standalone: false
+    imports: [AsyncPipe]
 })
 export class ProductsComponent {
   #setting: Settings = {limit: 12,skip: 0};

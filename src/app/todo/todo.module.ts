@@ -8,20 +8,17 @@ import { CommonModule } from "@angular/common";
 
 
 @NgModule({
-  // Chneya les pipes directives et composants eli tab3ini
-  declarations:[
-    TodoComponent,
-    WeekTodoComponent
-  ],
-  // Nwafer les dépendances mta3 les declarations mta3i
-  imports: [
-      TodoRoutingModule,
-      FormsModule,
-      CommonModule
-  ],
-  // el 7ajet eli neprovidihom
-  providers: [],
-  // eli n7ab npartagih m3a eli importini
-  exports: []
+    // Nwafer les dépendances mta3 les declarations mta3i
+    imports: [
+        TodoRoutingModule,
+        FormsModule,
+        CommonModule,
+        TodoComponent,
+        WeekTodoComponent
+    ],
+    // el 7ajet eli neprovidihom
+    providers: [],
+    // eli n7ab npartagih m3a eli importini
+    exports: []
 })
 export class TodoModule {}

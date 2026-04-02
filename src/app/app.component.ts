@@ -1,14 +1,15 @@
 import { Component, inject, Inject } from '@angular/core';
 import { LoggerService } from './services/logger.service';
 import { LoggerInjectionToken } from './tokens/logger.injection-token';
-import { NgxUiLoaderService } from 'ngx-ui-loader';
-import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
+import { NgxUiLoaderService, NgxUiLoaderModule } from 'ngx-ui-loader';
+import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterOutlet } from '@angular/router';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css'],
-    standalone: false
+    imports: [NavbarComponent, NgxUiLoaderModule, RouterOutlet]
 })
 export class AppComponent {
   title = 'Starting Advanced Topics';

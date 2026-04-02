@@ -1,11 +1,12 @@
 import { Component, Input } from "@angular/core";
 import { Observable, map, startWith, timer } from "rxjs";
+import { NgStyle, AsyncPipe } from "@angular/common";
 
 @Component({
     selector: "app-slider",
     templateUrl: "./slider.component.html",
     styleUrls: ["./slider.component.css"],
-    standalone: false
+    imports: [NgStyle, AsyncPipe]
 })
 export class SliderComponent {
   @Input() timerInterval = 1500;

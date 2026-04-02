@@ -3,12 +3,14 @@ import { Todo } from '../model/todo';
 import { TodoService } from '../service/todo.service';
 import { Subscription, timer } from 'rxjs';
 
+import { FormsModule } from '@angular/forms';
+
 @Component({
     selector: 'app-todo',
     templateUrl: './todo.component.html',
     styleUrls: ['./todo.component.css'],
     providers: [TodoService],
-    standalone: false
+    imports: [FormsModule]
 })
 export class TodoComponent implements OnDestroy {
   todos: Todo[] = [];

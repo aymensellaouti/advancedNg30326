@@ -1,5 +1,5 @@
 import { Component, inject, OnDestroy } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CvService } from '../services/cv.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -10,11 +10,12 @@ import { APP_ROUTES } from 'src/config/routes.config';
 import { CONSTANTES } from 'src/config/const.config';
 import { uniqueCinValidator } from 'src/app/validators/unique-cin.async-validator';
 
+
 @Component({
     selector: 'app-add-cv',
     templateUrl: './add-cv.component.html',
     styleUrls: ['./add-cv.component.css'],
-    standalone: false
+    imports: [FormsModule, ReactiveFormsModule]
 })
 export class AddCvComponent implements ICanLeave, OnDestroy {
   constructor(

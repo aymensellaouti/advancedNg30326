@@ -6,11 +6,15 @@ import { CvService } from "../services/cv.service";
 import { EMPTY, Observable, catchError, of } from "rxjs";
 import { TodoService } from "src/app/todo/service/todo.service";
 import { ActivatedRoute } from "@angular/router";
+import { ListComponent } from "../list/list.component";
+import { CvCardComponent } from "../cv-card/cv-card.component";
+import { EmbaucheComponent } from "../embauche/embauche.component";
+import { AsyncPipe, UpperCasePipe, DatePipe } from "@angular/common";
 @Component({
     selector: "app-cv",
     templateUrl: "./cv.component.html",
     styleUrls: ["./cv.component.css"],
-    standalone: false
+    imports: [ListComponent, CvCardComponent, EmbaucheComponent, AsyncPipe, UpperCasePipe, DatePipe]
 })
 export class CvComponent {
   cvs: Cv[] = [];
