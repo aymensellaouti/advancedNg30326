@@ -4,10 +4,11 @@ import { TodoService } from '../service/todo.service';
 import { Subscription, timer } from 'rxjs';
 
 @Component({
-  selector: 'app-todo',
-  templateUrl: './todo.component.html',
-  styleUrls: ['./todo.component.css'],
-  providers: [TodoService],
+    selector: 'app-todo',
+    templateUrl: './todo.component.html',
+    styleUrls: ['./todo.component.css'],
+    providers: [TodoService],
+    standalone: false
 })
 export class TodoComponent implements OnDestroy {
   todos: Todo[] = [];

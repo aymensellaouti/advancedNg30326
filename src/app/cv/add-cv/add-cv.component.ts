@@ -11,9 +11,10 @@ import { CONSTANTES } from 'src/config/const.config';
 import { uniqueCinValidator } from 'src/app/validators/unique-cin.async-validator';
 
 @Component({
-  selector: 'app-add-cv',
-  templateUrl: './add-cv.component.html',
-  styleUrls: ['./add-cv.component.css'],
+    selector: 'app-add-cv',
+    templateUrl: './add-cv.component.html',
+    styleUrls: ['./add-cv.component.css'],
+    standalone: false
 })
 export class AddCvComponent implements ICanLeave, OnDestroy {
   constructor(
