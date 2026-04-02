@@ -10,10 +10,6 @@ import { MasterDetailsComponent } from "./master-details/master-details.componen
 
 
 export const CV_ROUTES = [
-  {
-    path: 'cv',
-    canActivateChild: [],
-    children: [
       {
         path: '',
         component: CvComponent,
@@ -33,8 +29,6 @@ export const CV_ROUTES = [
         children: [{ path: ':id', component: DetailsCvComponent }],
       },
       { path: ':id', component: DetailsCvComponent },
-    ],
-  },
 ];
 @NgModule({
   imports: [RouterModule.forChild(CV_ROUTES)],
