@@ -51,7 +51,6 @@ const routes: Routes = [
     path: '',
     component: FrontComponent,
     children: [
-      { path: 'todo', component: TodoComponent },
       { path: 'word', component: MiniWordComponent },
     ],
   },

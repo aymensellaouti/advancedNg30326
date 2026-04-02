@@ -22,7 +22,7 @@ import { DetailsCvComponent } from "./cv/details-cv/details-cv.component";
 import { NgstyleComponent } from "./directives/ngstyle/ngstyle.component";
 import { MiniWordComponent } from "./directives/mini-word/mini-word.component";
 import { NgclassComponent } from "./directives/ngclass/ngclass.component";
-import { TodoComponent } from "./todo/todo/todo.component";
+
 
 import { HighlightDirective } from "./directives/highlight.directive";
 import { RainbowDirective } from "./directives/rainbow.directive";
@@ -58,9 +58,9 @@ import { LoggerInjectionToken } from "./tokens/logger.injection-token";
 import { Logger3Service } from "./services/logger3.service";
 import { UUID_TOKEN } from "./tokens/uuid.inject-token";
 import {v4 as uuidV4} from 'uuid';
-import { WeekTodoComponent } from './todo/week-todo/week-todo.component';
 import { MasterDetailsComponent } from './cv/master-details/master-details.component';
 import { NgxUiLoaderModule } from "ngx-ui-loader";
+import { TodoModule } from "./todo/todo.module";
 @NgModule({
   declarations: [
     AppComponent,
@@ -87,7 +87,6 @@ import { NgxUiLoaderModule } from "ngx-ui-loader";
     HighlightDirective,
     RainbowDirective,
     Btc2usdPipe,
-    TodoComponent,
     NavbarComponent,
     FrontComponent,
     AdminComponent,
@@ -100,7 +99,6 @@ import { NgxUiLoaderModule } from "ngx-ui-loader";
     RhComponent,
     UserListComponent,
     ProductsComponent,
-    WeekTodoComponent,
     MasterDetailsComponent,
   ],
   imports: [
@@ -108,6 +106,7 @@ import { NgxUiLoaderModule } from "ngx-ui-loader";
     FormsModule,
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added
+    TodoModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,

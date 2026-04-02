@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnDestroy } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CvService } from '../services/cv.service';
 import { Router } from '@angular/router';
@@ -7,13 +7,15 @@ import { ICanLeave } from 'src/app/guards/can-leave.interface';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { debounceTime } from 'rxjs';
 import { APP_ROUTES } from 'src/config/routes.config';
+import { CONSTANTES } from 'src/config/const.config';
+import { uniqueCinValidator } from 'src/app/validators/unique-cin.async-validator';
 
 @Component({
   selector: 'app-add-cv',
   templateUrl: './add-cv.component.html',
   styleUrls: ['./add-cv.component.css'],
 })
-export class AddCvComponent implements ICanLeave {
+export class AddCvComponent implements ICanLeave, OnDestroy {
   constructor(
     private cvService: CvService,
     private router: Router,
@@ -32,7 +34,17 @@ export class AddCvComponent implements ICanLeave {
           this.path?.disable();
         }
       }
-    })
+    });
+
+    const addCvForm = localStorage.getItem(CONSTANTES.addCvForm);
+    if (addCvForm) {
+      this.form.patchValue(JSON.parse(addCvForm));
+    }
+  }
+  ngOnDestroy(): void {
+    if (this.form.valid) {
+      localStorage.setItem(CONSTANTES.addCvForm, JSON.stringify(this.form.value))
+    }
   }
   formBuilder = inject(FormBuilder);
   form: FormGroup = this.formBuilder.group(
@@ -44,8 +56,9 @@ export class AddCvComponent implements ICanLeave {
       cin: [
         '',
         {
-          validators: [Validators.required, Validators.pattern('[0-9]{8}')],
-          asyncValidators: [],
+          validators: [Validators.required],
+          asyncValidators: [uniqueCinValidator(this.cvService)],
+          updateOn: 'blur'
         },
       ],
       age: [
@@ -66,6 +79,8 @@ export class AddCvComponent implements ICanLeave {
     this.cvService.addCv(this.form.getRawValue()).subscribe({
       next: () => {
         this.toaster.success(`Le cv a été ajouté avec succès`);
+        this.form.reset();
+        localStorage.removeItem(CONSTANTES.addCvForm);
         this.router.navigate([APP_ROUTES.cv]);
       },
       error: (erreur) => {
