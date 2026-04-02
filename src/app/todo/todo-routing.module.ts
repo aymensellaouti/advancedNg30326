@@ -3,7 +3,7 @@ import { RouterModule } from "@angular/router";
 import { TodoComponent } from "./todo/todo.component";
 
 
-export const TODO_ROUTES = [{ path: 'todo', component: TodoComponent }];
+export const TODO_ROUTES = [{ path: '', component: TodoComponent }];
 @NgModule({
   imports: [RouterModule.forChild(TODO_ROUTES)],
   exports: [RouterModule],
